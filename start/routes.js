@@ -17,3 +17,14 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.post('api/auth/register', 'UserController.register')
+Route.post('api/auth/login', 'UserController.login').middleware('guest')
+
+//Instructor Task Route
+Route.group(() => {
+	Route.post('task', 'Instructor/InstructorController.store')
+	Route.get('task', 'Instructor/InstructorController.get')
+})
+.prefix(`/api/instructor`)
+.middleware(['auth:user', 'instructor'])
