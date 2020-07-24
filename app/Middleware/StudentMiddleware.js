@@ -3,19 +3,20 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-class InstructorMiddleware {
+class StudentMiddleware {
   /**
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request,auth }, next) {
+  async handle ({ request, auth }, next) {
     // call next to advance the request
-    if(auth.user.role == 0) {
+    // call next to advance the request
+    if(auth.user.role !== 0) {
      return "Authorized Access!!!"
     }
     await next()
   }
 }
 
-module.exports = InstructorMiddleware
+module.exports = StudentMiddleware
